@@ -1,0 +1,236 @@
+import Link from 'next/link';
+import { ArrowRight, CheckCircle2, Cloud, Lock, ShieldCheck, ShieldX, TimerReset } from 'lucide-react';
+import { faqItems, featureItems } from '@/lib/content';
+import { securityHighlights } from '@/lib/mock-data';
+
+const lifecycle = ['UPLOAD', 'ENCRYPT', 'SHARE', 'DOWNLOAD', 'DESTROY'];
+
+export default function Home() {
+  return (
+    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(16,185,129,0.08),_transparent_30%),linear-gradient(180deg,#020817_0%,#0b1120_60%,#020817_100%)] text-slate-50">
+      <header className="mx-auto max-w-7xl px-6 pt-8">
+        <nav className="flex items-center justify-between rounded-full border border-white/10 bg-slate-900/60 px-5 py-3 backdrop-blur-md">
+          <div className="flex items-center gap-3">
+            <div className="rounded-full border border-cyan-400/30 bg-cyan-500/10 p-2 text-cyan-300">
+              <ShieldCheck className="h-5 w-5" />
+            </div>
+            <div>
+              <div className="text-lg font-semibold">CloudVault Zero</div>
+              <div className="text-[10px] uppercase tracking-[0.28em] text-slate-400">Zero-Retention</div>
+            </div>
+          </div>
+          <div className="hidden items-center gap-8 text-sm text-slate-300 md:flex">
+            <Link href="#how-it-works">How it works</Link>
+            <Link href="#security">Security</Link>
+            <Link href="#features">Features</Link>
+            <Link href="#faq">FAQ</Link>
+          </div>
+          <div className="flex gap-3">
+            <Link href="/login" className="rounded-full border border-slate-700 px-4 py-2 text-sm text-slate-200">Login</Link>
+            <Link href="/upload" className="rounded-full bg-cyan-500 px-4 py-2 text-sm font-medium text-slate-950">Send a File</Link>
+          </div>
+        </nav>
+      </header>
+
+      <section className="mx-auto grid max-w-7xl gap-16 px-6 pb-20 pt-20 lg:grid-cols-[1.2fr_0.8fr]">
+        <div>
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-cyan-200">
+            <ShieldCheck className="h-3.5 w-3.5" /> DEMO MODE
+          </div>
+
+          <h1 className="max-w-xl text-5xl font-black leading-tight tracking-tight md:text-6xl">
+            Send Files. <span className="text-cyan-300">Not Footprints.</span>
+          </h1>
+          <p className="mt-6 max-w-xl text-lg text-slate-300">
+            CloudVault Zero securely transfers your files through temporary cloud storage designed to automatically disappear after their lifecycle ends.
+          </p>
+
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Link href="/upload" className="inline-flex items-center gap-2 rounded-full bg-cyan-500 px-6 py-3 font-semibold text-slate-950 transition hover:bg-cyan-400">
+              Send a File <ArrowRight className="h-4 w-4" />
+            </Link>
+            <a href="#how-it-works" className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/60 px-6 py-3 font-semibold text-slate-100">
+              How It Works
+            </a>
+            <Link href="/register" className="inline-flex items-center gap-2 rounded-full border border-slate-700 px-6 py-3 font-semibold text-slate-200">
+              Create Account
+            </Link>
+          </div>
+
+          <div className="mt-12 flex flex-wrap gap-8 text-sm text-slate-300">
+            <div><span className="text-2xl font-bold text-slate-50">94</span> privacy score average</div>
+            <div><span className="text-2xl font-bold text-slate-50">5 min</span> default expiration</div>
+            <div><span className="text-2xl font-bold text-slate-50">0</span> permanent storage</div>
+          </div>
+        </div>
+
+        <div className="rounded-3xl border border-cyan-500/20 bg-slate-900/70 p-6 shadow-glow backdrop-blur-xl">
+          <div className="mb-6 flex items-center justify-between">
+            <div>
+              <div className="text-xs uppercase tracking-[0.25em] text-slate-400">Lifecycle</div>
+              <div className="mt-2 text-2xl font-bold text-cyan-300">UPLOAD → DESTROY</div>
+            </div>
+            <div className="rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-300">Secure</div>
+          </div>
+
+          <div className="space-y-3">
+            {lifecycle.map((item, index) => (
+              <div key={item} className="flex items-center gap-4 rounded-2xl border border-slate-800 bg-slate-950/60 p-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-cyan-500/15 text-sm font-bold text-cyan-300">
+                  {index + 1}
+                </div>
+                <div className="flex-1 text-sm font-medium text-slate-200">{item}</div>
+                {index < lifecycle.length - 1 && <ArrowRight className="h-4 w-4 text-slate-500" />}
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+            <div className="rounded-2xl border border-slate-800 bg-slate-950/70 p-4">
+              <div className="mb-2 flex items-center gap-2 text-cyan-300"><Lock className="h-4 w-4" /> Secure Token</div>
+              <div className="font-mono text-sm text-slate-100">/share/8dK92xLmP7Q</div>
+            </div>
+            <div className="rounded-2xl border border-slate-800 bg-slate-950/70 p-4">
+              <div className="mb-2 flex items-center gap-2 text-cyan-300"><TimerReset className="h-4 w-4" /> Auto Expire</div>
+              <div className="font-mono text-sm text-slate-100">15 min</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="how-it-works" className="mx-auto max-w-7xl px-6 py-20">
+        <div className="mb-8 text-center">
+          <div className="text-xs uppercase tracking-[0.3em] text-cyan-300">How it works</div>
+          <h2 className="mt-4 text-4xl font-bold">Zero-retention from upload to destruction</h2>
+        </div>
+        <div className="grid gap-6 md:grid-cols-4">
+          {[
+            ['Select File', 'Safely validate the file name, size, extension, and content type before upload begins.'],
+            ['Encrypt', 'Encrypt files with AES-256-GCM so data is protected before temporary cloud persistence.'],
+            ['Share Securely', 'Generate a tokenized link with access validation, optional password protection, and download limits.'],
+            ['Destroy', 'When the timer or limit is reached, the file and metadata are revoked and cleaned up.'],
+          ].map(([title, desc], index) => (
+            <div key={title} className="rounded-2xl border border-slate-800 bg-slate-900/70 p-6">
+              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full border border-cyan-500/30 bg-cyan-500/10 text-sm font-bold text-cyan-300">
+                {index + 1}
+              </div>
+              <h3 className="text-xl font-semibold text-slate-50">{title}</h3>
+              <p className="mt-4 text-slate-300">{desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="security" className="mx-auto max-w-7xl px-6 py-20">
+        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="rounded-3xl border border-slate-800 bg-slate-900/70 p-8">
+            <div className="mb-4 flex items-center gap-3 text-cyan-300">
+              <Cloud className="h-6 w-6" />
+              <div className="text-xs uppercase tracking-[0.3em]">Why Zero-Retention?</div>
+            </div>
+            <h3 className="text-3xl font-bold">A temporary cloud exchange designed around privacy</h3>
+            <p className="mt-4 text-slate-300">
+              Traditional cloud storage keeps data longer than necessary. CloudVault Zero is built around the opposite model: secure transmission, temporary retention, fast access, and automatic deletion.
+            </p>
+            <div className="mt-8 space-y-4">
+              {securityHighlights.map((item) => (
+                <div key={item} className="flex items-start gap-3 rounded-2xl border border-slate-800 bg-slate-950/60 p-3">
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 text-emerald-400" />
+                  <span className="text-slate-200">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-6">
+              <ShieldCheck className="h-10 w-10 text-cyan-300" />
+              <h4 className="mt-5 text-xl font-semibold">No permanent public URLs</h4>
+              <p className="mt-3 text-slate-300">Files are never exposed via public bucket URLs. Access is validated with signed server-side logic.</p>
+            </div>
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-6">
+              <ShieldX className="h-10 w-10 text-cyan-300" />
+              <h4 className="mt-5 text-xl font-semibold">Data minimization</h4>
+              <p className="mt-3 text-slate-300">Only the minimum metadata required for transfer operations and audit traces is kept.</p>
+            </div>
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-6">
+              <Lock className="h-10 w-10 text-cyan-300" />
+              <h4 className="mt-5 text-xl font-semibold">Protected transfer logic</h4>
+              <p className="mt-3 text-slate-300">Password checks, reuse limitations, and token validation prevent brute-force or spoofed access.</p>
+            </div>
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-6">
+              <TimerReset className="h-10 w-10 text-cyan-300" />
+              <h4 className="mt-5 text-xl font-semibold">Self-destruction</h4>
+              <p className="mt-3 text-slate-300">The transfer lifecycle ends with file deletion, access revocation, and metadata pruning.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" className="mx-auto max-w-7xl px-6 py-20">
+        <div className="mb-8 text-center">
+          <div className="text-xs uppercase tracking-[0.3em] text-cyan-300">Features</div>
+          <h2 className="mt-4 text-4xl font-bold">Built for secure temporary exchange</h2>
+        </div>
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          {featureItems.map((feature) => (
+            <div key={feature.title} className="rounded-2xl border border-slate-800 bg-slate-900/70 p-6">
+              <div className="mb-4 h-11 w-11 rounded-2xl bg-cyan-500/10 p-2 text-cyan-300 shadow-inner shadow-cyan-500/20">
+                <ShieldCheck className="h-full w-full" />
+              </div>
+              <h3 className="text-xl font-semibold text-slate-50">{feature.title}</h3>
+              <p className="mt-3 text-slate-300">{feature.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-20">
+        <div className="rounded-3xl border border-cyan-500/20 bg-slate-900/80 p-8">
+          <div className="grid gap-6 lg:grid-cols-[0.7fr_1.3fr]">
+            <div>
+              <div className="text-xs uppercase tracking-[0.3em] text-cyan-300">Privacy score</div>
+              <div className="mt-4 text-5xl font-black text-cyan-300">94 <span className="text-xl text-slate-300">/ 100</span></div>
+            </div>
+            <div>
+              <div className="mb-3 flex flex-wrap items-center gap-3 text-sm text-slate-200">
+                <span className="rounded-full border border-emerald-400/30 bg-emerald-500/10 px-2 py-1 text-emerald-300">AES-256-GCM</span>
+                <span className="rounded-full border border-emerald-400/30 bg-emerald-500/10 px-2 py-1 text-emerald-300">One-time download</span>
+                <span className="rounded-full border border-emerald-400/30 bg-emerald-500/10 px-2 py-1 text-emerald-300">15-minute expiration</span>
+              </div>
+              <p className="text-slate-300">
+                Enable password protection to increase your privacy score and reduce the chance of unauthorized access.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" className="mx-auto max-w-5xl px-6 py-20">
+        <div className="mb-8 text-center">
+          <div className="text-xs uppercase tracking-[0.3em] text-cyan-300">FAQ</div>
+          <h2 className="mt-4 text-4xl font-bold">Questions about zero-retention transfer</h2>
+        </div>
+        <div className="space-y-4">
+          {faqItems.map((item) => (
+            <div key={item.q} className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
+              <div className="text-lg font-semibold text-slate-50">{item.q}</div>
+              <p className="mt-2 text-slate-300">{item.a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <footer className="border-t border-slate-800 bg-slate-950/80">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-10 text-sm text-slate-400 md:flex-row md:items-center md:justify-between">
+          <div>© 2026 CloudVault Zero. Temporary cloud exchange for secure file transfer.</div>
+          <div className="flex items-center gap-6">
+            <Link href="/dashboard">Dashboard</Link>
+            <Link href="/admin">Admin</Link>
+            <Link href="/login">Sign in</Link>
+          </div>
+        </div>
+      </footer>
+    </main>
+  );
+}
